@@ -1,0 +1,214 @@
+/*
+ * StreamGlass — the StreamRSS look for FreshRSS (+ Youlag)
+ *
+ * Palette from the Android app: deep navy, translucent white glass with a hairline
+ * edge, soft blue accent (#8AB4FF), and the same aurora gradient as the tablet wallpaper.
+ *
+ * `html:root:root` / `html body` give these rules more weight than Youlag's `:root` and
+ * plain selectors, so load order between the extensions doesn't matter.
+ */
+
+/* ───────────────────────── Tokens ───────────────────────── */
+
+html:root:root {
+	--sg-navy: hsl(228 38% 8%);
+	--sg-accent: #8ab4ff;
+	--sg-glass: hsl(0 0% 100% / 6%);
+	--sg-glass-hover: hsl(0 0% 100% / 10%);
+	--sg-glass-strong: hsl(0 0% 100% / 13%);
+	--sg-edge: hsl(0 0% 100% / 13%);
+	--sg-edge-strong: hsl(0 0% 100% / 24%);
+	--sg-panel: hsl(228 32% 11% / 46%);
+	--sg-reader: hsl(228 34% 9% / 84%);
+	--sg-radius: 18px;
+
+	/* Re-skin Youlag's palette */
+	--yl-color-body-background: transparent;
+	--yl-color-surface-lowest: hsl(228 32% 11% / 72%);
+	--yl-color-surface-low: hsl(228 28% 15% / 64%);
+	--yl-color-surface-medium: hsl(228 24% 19% / 74%);
+	--yl-color-surface-high: hsl(228 20% 25% / 80%);
+	--yl-color-surface-highest: hsl(228 16% 32% / 86%);
+	--yl-color-surface-menu: hsl(228 30% 13% / 92%);
+	--yl-color-thumbnail-background: hsl(0 0% 100% / 6%);
+
+	--yl-color-text-highest: #f4f6fb;
+	--yl-color-text-high: #e8eaf2;
+	--yl-color-text-medium: #c9cedc;
+	--yl-color-text-low: #9aa3b8;
+	--yl-color-text-lowest: #7c8499;
+
+	--yl-color-accent-action: hsl(219 100% 77%);
+	--yl-color-accent-unread: hsl(219 70% 52%);
+	--yl-color-accent-unread-dark: hsl(219 75% 42%);
+	--yl-color-gradient-active: linear-gradient(135deg, hsl(219 85% 62% / 90%), hsl(252 70% 64% / 90%));
+
+	--yl-color-gradient-nav: linear-gradient(135deg, hsl(228 30% 14% / 52%), hsl(228 32% 10% / 62%));
+	--yl-color-gradient-sidenav-item-active: linear-gradient(135deg, hsl(0 0% 100% / 16%), hsl(0 0% 100% / 8%));
+	--yl-color-gradient-list-item-hover: linear-gradient(135deg, hsl(0 0% 100% / 12%), hsl(0 0% 100% / 6%));
+	--yl-color-gradient-button: linear-gradient(180deg, hsl(0 0% 100% / 10%), hsl(0 0% 100% / 4%));
+
+	--yl-color-bg-sidenav-count: hsl(0 0% 100% / 10%);
+	--yl-color-bg-sidenav-count-dark: hsl(0 0% 100% / 8%);
+	--yl-color-bg-header-button: var(--sg-glass);
+	--yl-color-bg-control: hsl(0 0% 100% / 8%);
+	--yl-color-bg-menu-control: hsl(0 0% 100% / 10%);
+	--yl-color-border-search: var(--sg-edge);
+	--yl-color-border-sidenav: var(--sg-edge);
+}
+
+/* ───────────────────────── Aurora background ───────────────────────── */
+
+html {
+	background: var(--sg-navy);
+}
+
+html body {
+	background:
+		linear-gradient(hsl(228 40% 6% / 52%), hsl(228 40% 6% / 52%)),
+		radial-gradient(60vmax 60vmax at 8% 12%, hsl(187 65% 45% / 55%), transparent 62%),
+		radial-gradient(55vmax 55vmax at 92% 8%, hsl(246 65% 58% / 55%), transparent 62%),
+		radial-gradient(65vmax 65vmax at 82% 92%, hsl(295 50% 48% / 48%), transparent 62%),
+		radial-gradient(50vmax 50vmax at 8% 92%, hsl(14 75% 64% / 38%), transparent 62%),
+		var(--sg-navy) !important;
+	background-attachment: fixed !important;
+	color: var(--yl-color-text-high);
+}
+
+/* ───────────────────────── Sidebar ───────────────────────── */
+
+html body .aside.aside_feed,
+html body #aside_feed {
+	background: var(--sg-panel) !important;
+	border-right: 1px solid var(--sg-edge);
+}
+
+html body .tree .tree-folder.active > .tree-folder-title,
+html body .nav-list .item.active {
+	box-shadow: inset 0 0 0 1px var(--sg-edge);
+	border-radius: 12px;
+}
+
+/* ───────────────────────── Article list (Youlag article mode / plain FreshRSS) ───────────────────────── */
+
+html body:not(.yl-mode-video):not(.reader) main#stream div.flux {
+	background: var(--sg-glass);
+	border: 1px solid var(--sg-edge);
+	border-radius: var(--sg-radius);
+	margin: 0 0 10px;
+	overflow: hidden;
+	transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+html body:not(.yl-mode-video):not(.reader) main#stream div.flux:hover {
+	background: var(--sg-glass-hover);
+	border-color: var(--sg-edge-strong);
+}
+
+html body:not(.yl-mode-video):not(.reader) main#stream div.flux.current {
+	background: var(--sg-glass-strong);
+	border-color: hsl(219 100% 77% / 45%);
+}
+
+/* Read items fade back like in the app. */
+html body:not(.reader) main#stream div.flux:not(.not_read):not(.current) .flux_header {
+	opacity: 0.62;
+}
+
+html body:not(.yl-mode-video):not(.reader) main#stream div.flux .flux_header {
+	background: transparent !important;
+	border: 0 !important;
+}
+
+/* Rounded thumbnails */
+html body main#stream div.flux .flux_header .item.thumbnail img,
+html body main#stream div.flux .flux_header .item.thumbnail .item-element {
+	border-radius: 14px;
+}
+
+/* ───────────────────────── Video grid (Youlag video mode) ───────────────────────── */
+
+html body.yl-mode-video:not(.reader) main#stream div.flux {
+	background: var(--sg-glass);
+	border: 1px solid var(--sg-edge);
+	transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+html body.yl-mode-video:not(.reader) main#stream div.flux:hover {
+	background: var(--sg-glass-hover);
+	border-color: var(--sg-edge-strong);
+	transform: translateY(-2px);
+}
+
+/* ───────────────────────── Reading pane / opened article ───────────────────────── */
+
+html body #slider,
+html body:not(.yl-mode-video) main#stream div.flux.current .flux_content {
+	background: var(--sg-reader) !important;
+	-webkit-backdrop-filter: blur(24px) saturate(130%);
+	backdrop-filter: blur(24px) saturate(130%);
+}
+
+html body main#stream div.flux .flux_content .content,
+html body #slider .content {
+	color: #e8eaf2;
+	line-height: 1.7;
+}
+
+html body .flux_content .content a,
+html body #slider .content a {
+	color: var(--sg-accent);
+}
+
+html body .flux_content .content img,
+html body .flux_content .content video,
+html body .flux_content .content iframe {
+	border-radius: 12px;
+}
+
+html body .flux_content .content blockquote {
+	border-left: 3px solid hsl(0 0% 100% / 25%);
+	color: #c5cad8;
+	margin-left: 0;
+	padding-left: 16px;
+}
+
+html body .flux_content .content pre {
+	background: hsl(0 0% 100% / 7%);
+	border-radius: 10px;
+}
+
+/* ───────────────────────── Menus, boxes, inputs ───────────────────────── */
+
+html body .dropdown-menu,
+html body .box {
+	border: 1px solid var(--sg-edge);
+	border-radius: 16px;
+	-webkit-backdrop-filter: blur(28px) saturate(140%);
+	backdrop-filter: blur(28px) saturate(140%);
+}
+
+html body input[type="search"],
+html body input[type="text"],
+html body input[type="url"],
+html body input[type="password"],
+html body select,
+html body textarea {
+	background: hsl(0 0% 100% / 7%);
+	border: 1px solid var(--sg-edge);
+	border-radius: 12px;
+	color: var(--yl-color-text-high);
+}
+
+html body input:focus,
+html body select:focus,
+html body textarea:focus {
+	border-color: hsl(219 100% 77% / 70%);
+	outline: none;
+}
+
+/* ───────────────────────── Scrollbars ───────────────────────── */
+
+html {
+	scrollbar-color: hsl(0 0% 100% / 22%) transparent;
+}

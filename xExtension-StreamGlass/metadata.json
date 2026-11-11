@@ -1,0 +1,8 @@
+{
+	"name": "StreamGlass",
+	"author": "Sean",
+	"description": "StreamRSS look for FreshRSS: dark aurora background, frosted glass panels and cards, soft blue accent. Designed to sit on top of Youlag.",
+	"version": "0.1.0",
+	"entrypoint": "StreamGlass",
+	"type": "user"
+}
