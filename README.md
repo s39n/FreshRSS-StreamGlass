@@ -7,6 +7,11 @@ It's a style-only FreshRSS extension designed to sit on top of
 [Youlag](https://github.com/civilblur/youlag): it re-skins Youlag's design tokens (`--yl-*`), so
 both Youlag's article mode and its video grid pick up the glass style. It also works without Youlag.
 
+## Video view extras (with Youlag)
+
+- **Saved in** chips under a video's buttons, one per playlist it's in. Tap a chip to remove the video from that playlist, without scrolling down to the playlist controls.
+- **Long descriptions collapse** to a few lines on every screen size, with a Show more / Show less button.
+
 ## Install
 
 Copy `xExtension-StreamGlass/` into FreshRSS's `extensions/` folder, then enable **StreamGlass** under
