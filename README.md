@@ -1,6 +1,6 @@
 # StreamGlass for FreshRSS
 
-The [StreamRSS](https://github.com/s39n/StreamRSS) look for the FreshRSS web UI: a dark aurora
+The StreamRSS look (from a companion Android reader) for the FreshRSS web UI: a dark aurora
 background, frosted glass panels and cards, read items faded back, and a soft blue accent (`#8AB4FF`).
 
 It's a style-only FreshRSS extension designed to sit on top of
@@ -9,8 +9,7 @@ both Youlag's article mode and its video grid pick up the glass style. It also w
 
 ## Install
 
-Copy `xExtension-StreamGlass/` into FreshRSS's `extensions/` folder
-(on the NAS: `/share/Docker/FreshRSS/extenshions/`), then enable **StreamGlass** under
+Copy `xExtension-StreamGlass/` into FreshRSS's `extensions/` folder, then enable **StreamGlass** under
 FreshRSS → Settings → Extensions.
 
 Keep Youlag's own theme setting on **dark**; StreamGlass is a dark theme.
